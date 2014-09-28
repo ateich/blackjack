@@ -8,10 +8,21 @@ describe 'deck', ->
     deck = new Deck()
     hand = deck.dealPlayer()
 
-  describe 'hit', ->
-    it "should give the last card from the deck", ->
+  describe 'shuffle', ->
+    it "should shuffle the deck after it is empty", ->
       assert.strictEqual deck.length, 50
-      assert.strictEqual deck.last(), hand.hit()
+      i=0
+      while i<51
+        hand.hit()
+        i++
+      # assert.strictEqual deck.last(), hand.hit()
+      # assert.strictEqual deck.length, 49
+      # hand.playable && (assert.strictEqual deck.last(), hand.hit())
+      # hand.playable && (assert.strictEqual deck.length, 48)
+      assert.strictEqual deck.length, 51
+
+  describe 'hit', ->
+    it "deck should reduce card count by 1", ->
+      assert.strictEqual deck.length, 50
+      hand.hit()
       assert.strictEqual deck.length, 49
-      hand.playable && (assert.strictEqual deck.last(), hand.hit())
-      hand.playable && (assert.strictEqual deck.length, 48)
